@@ -5,7 +5,9 @@ import learn.abiturient.demo.database.repository.VariantsRepo;
 import learn.abiturient.demo.exception.ExceptionClass;
 import learn.abiturient.demo.exception.error.BadRequest;
 import learn.abiturient.demo.requests.VariantRequest;
+import learn.abiturient.demo.requests.VariantsByDirectionRequest;
 import learn.abiturient.demo.responses.SuccessfulResponse;
+import learn.abiturient.demo.responses.VariantResponse;
 import learn.abiturient.demo.services.VariantServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+import static learn.abiturient.demo.utils.Mappings.DIRECTION;
 import static learn.abiturient.demo.utils.Mappings.VARIANT;
 
 @RestController
@@ -30,6 +33,16 @@ public class VariantController {
     @GetMapping
     public List<Variants> getVariants() {
         return services.getVariants();
+    }
+
+    @GetMapping(path = DIRECTION + "/{direction_id}")
+    public List<Variants> getVariantsByDirectionId(@PathVariable Long direction_id) {
+        return services.getVariantsByDirectionId(direction_id);
+    }
+
+    @GetMapping(path = "/{variant_id}")
+    public VariantResponse getOneVariants(@PathVariable Long variant_id) {
+        return services.getOneVAriants(variant_id);
     }
 
     @PostMapping

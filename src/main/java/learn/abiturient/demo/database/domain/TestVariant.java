@@ -10,16 +10,19 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Getter
-@Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class TestVariant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @NotBlank
     private String variant;
+
+    public TestVariant(String variant) {
+        this.variant = variant;
+    }
 }
